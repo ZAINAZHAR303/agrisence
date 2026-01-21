@@ -131,23 +131,69 @@ def create_datasets(data_dir: Path) -> Tuple[tf.data.Dataset, tf.data.Dataset, t
     return train_ds, val_ds, test_ds, dataset_info
 
 
+def random_rotation(image):
+    """Apply random rotation to image"""
+    # Random rotation in degrees
+    angle = tf.random.uniform([], -30, 30) * (3.14159 / 180.0)  # Convert to radians
+    image = tf.keras.preprocessing.image.apply_affine_transform(
+        image.numpy(),
+        theta=angle.numpy() * 180.0 / 3.14159,
+        row_axis=0,
+        col_axis=1,
+        channel_axis=2,
+        fill_mode='nearest'
+    )
+    return tf.convert_to_tensor(image)
+
+
 def load_and_preprocess_image(image_path: str, label: int, is_training: bool = False):
-    """Load and preprocess a single image"""
+    """Load and preprocess a single image with advanced augmentation"""
     # Read image
     image = tf.io.read_file(image_path)
-    image = tf.image.decode_jpeg(image, channels=3)
+    
+    # Decode with error handling
+    try:
+        image = tf.image.decode_jpeg(image, channels=3)
+    except:
+        image = tf.image.decode_png(image, channels=3)
     
     # Resize
     image = tf.image.resize(image, config.IMAGE_SIZE)
     
-    # Data augmentation for training
+    # Advanced data augmentation for training
     if is_training:
+        # Random horizontal flip
         image = tf.image.random_flip_left_right(image)
-        image = tf.image.random_brightness(image, 0.2)
-        image = tf.image.random_contrast(image, 0.8, 1.2)
-        image = tf.image.random_saturation(image, 0.8, 1.2)
-        # Random rotation
+        
+        # Random rotation (using rot90 for simplicity)
         image = tf.image.rot90(image, k=tf.random.uniform(shape=[], minval=0, maxval=4, dtype=tf.int32))
+        
+        # Random brightness
+        image = tf.image.random_brightness(image, 0.2)
+        
+        # Random contrast
+        image = tf.image.random_contrast(image, 0.8, 1.2)
+        
+        # Random saturation
+        image = tf.image.random_saturation(image, 0.8, 1.2)
+        
+        # Random hue
+        image = tf.image.random_hue(image, 0.1)
+        
+        # Random zoom (via crop and resize)
+        if tf.random.uniform([]) > 0.5:
+            # Zoom in by cropping then resizing
+            crop_size = tf.random.uniform([], 0.8, 1.0)
+            crop_h = tf.cast(config.IMAGE_SIZE[0] * crop_size, tf.int32)
+            crop_w = tf.cast(config.IMAGE_SIZE[1] * crop_size, tf.int32)
+            image = tf.image.random_crop(
+                tf.cast(image, tf.uint8),
+                size=[crop_h, crop_w, 3]
+            )
+            image = tf.image.resize(image, config.IMAGE_SIZE)
+        
+        # Ensure values are valid
+        image = tf.clip_by_value(image, 0.0, 255.0)
     
     # Normalize to [0, 1] for EfficientNet
     image = tf.cast(image, tf.float32) / 255.0

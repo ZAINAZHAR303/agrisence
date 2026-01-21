@@ -16,16 +16,22 @@ LOGS_DIR.mkdir(exist_ok=True)
 
 # Dataset configuration
 IMAGE_SIZE = (224, 224)  # EfficientNetB0 input size
-BATCH_SIZE = 16  # Reduced for 2GB GPU
+BATCH_SIZE = 32  # Optimized for Mac GPU/CPU
 VALIDATION_SPLIT = 0.2
 TEST_SPLIT = 0.1
 RANDOM_SEED = 42
 
+# Training optimization
+USE_COSINE_DECAY = True  # Use cosine learning rate decay
+WARMUP_EPOCHS = 3  # Learning rate warmup
+LABEL_SMOOTHING = 0.1  # Prevent overconfidence
+
 # Training configuration
-EPOCHS = 20  # Reduced for faster training
-LEARNING_RATE = 0.001  # Slightly higher learning rate
-EARLY_STOPPING_PATIENCE = 7
-REDUCE_LR_PATIENCE = 3
+EPOCHS = 30  # Increased for better convergence
+LEARNING_RATE = 0.0001  # Lower for more stable training
+EARLY_STOPPING_PATIENCE = 10  # More patience for convergence
+REDUCE_LR_PATIENCE = 4
+MIN_LEARNING_RATE = 1e-7
 
 # Model configuration
 MODEL_NAME = "EfficientNetB0"
@@ -35,15 +41,23 @@ POOLING = "avg"
 
 # Data augmentation parameters
 AUGMENTATION_CONFIG = {
-    'rotation_range': 20,
+    'rotation_range': 30,  # Increased rotation
     'width_shift_range': 0.2,
     'height_shift_range': 0.2,
     'horizontal_flip': True,
     'vertical_flip': False,
     'zoom_range': 0.2,
-    'shear_range': 0.1,
+    'shear_range': 0.15,
+    'brightness_range': [0.8, 1.2],  # Added brightness variation
     'fill_mode': 'nearest'
 }
+
+# Class weight balancing (to handle imbalanced dataset)
+USE_CLASS_WEIGHTS = True
+
+# Fine-tuning configuration
+FINE_TUNE_LAYERS = 50  # Number of layers to unfreeze for fine-tuning
+FINE_TUNE_EPOCHS = 15  # Additional epochs for fine-tuning
 
 # Class names (will be auto-generated from dataset)
 CLASS_NAMES = []

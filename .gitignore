@@ -71,3 +71,17 @@ Thumbs.db
 *.bak
 *.swp
 *~.nib
+
+# Node.js / Frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# Next.js
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts

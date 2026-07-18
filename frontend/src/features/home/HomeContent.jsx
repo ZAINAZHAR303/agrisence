@@ -227,18 +227,18 @@ export default function HomeContent() {
             </div>
 
             {/* right — farmer image + floating cards */}
-            <div className="relative hidden lg:flex justify-center items-center h-[65vh] max-h-[700px]">
+            <div className="relative hidden lg:flex justify-center items-end h-[110vh] max-h-[700px]">
               <motion.div
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.2 }}
-                className="relative h-full w-full max-w-md"
+                className="relative h-[95%] w-full max-w-md"
               >
                 <Image
                   src="/farmer-tablet.png"
                   alt="Farmer using AgriSense"
                   fill
-                  className="object-contain object-center"
+                  className="object-contain object-bottom"
                 />
               </motion.div>
               <DiseaseCard />
@@ -288,22 +288,26 @@ export default function HomeContent() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.6, delay: i * 0.1 }}
-                  className="group rounded-3xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+                  className="group rounded-3xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col h-full"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-50 mb-4">
                     <Icon className="h-6 w-6 text-green-600" />
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 mb-2">{feat.title}</h3>
                   <p className="text-sm text-slate-500 leading-7 mb-4">{feat.body}</p>
-                  <Link
-                    href={feat.href}
-                    className="inline-flex items-center gap-1 text-sm font-semibold text-green-600 hover:text-green-500 transition-colors"
-                  >
-                    Explore <ChevronRight className="h-4 w-4" />
-                  </Link>
-                  {/* card illustration */}
-                  <div className="mt-5 h-28 rounded-2xl overflow-hidden bg-green-50 relative">
-                    <Image src={feat.img} alt={feat.title} fill className="object-contain p-2" />
+                  
+                  {/* Push actions to bottom for perfect horizontal alignment */}
+                  <div className="mt-auto pt-2">
+                    <Link
+                      href={feat.href}
+                      className="inline-flex items-center gap-1 text-sm font-semibold text-green-600 hover:text-green-500 transition-colors"
+                    >
+                      Explore <ChevronRight className="h-4 w-4" />
+                    </Link>
+                    {/* card illustration */}
+                    <div className="mt-5 h-28 rounded-2xl overflow-hidden bg-green-50 relative">
+                      <Image src={feat.img} alt={feat.title} fill className="object-contain p-2" />
+                    </div>
                   </div>
                 </motion.div>
               );

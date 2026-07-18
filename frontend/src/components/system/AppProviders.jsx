@@ -84,6 +84,8 @@ export function useToast() {
   return useContext(ToastContext);
 }
 
+import { AuthProvider } from "@/contexts/AuthContext";
+
 export default function AppProviders({ children }) {
   const [toasts, setToasts] = useState([]);
 
@@ -102,9 +104,11 @@ export default function AppProviders({ children }) {
   const value = useMemo(() => ({ pushToast }), []);
 
   return (
-    <ToastContext.Provider value={value}>
-      <ToastViewport toasts={toasts} removeToast={removeToast} />
-      <PageTransition>{children}</PageTransition>
-    </ToastContext.Provider>
+    <AuthProvider>
+      <ToastContext.Provider value={value}>
+        <ToastViewport toasts={toasts} removeToast={removeToast} />
+        <PageTransition>{children}</PageTransition>
+      </ToastContext.Provider>
+    </AuthProvider>
   );
 }

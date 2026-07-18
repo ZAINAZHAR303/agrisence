@@ -97,7 +97,7 @@ export default function Footer() {
         <svg viewBox="0 0 110 180" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M15 180 C15 120 70 60 50 5 C95 50 125 130 60 180Z" fill="#4ade80"/>
           <line x1="35" y1="178" x2="50" y2="5" stroke="#86efac" strokeWidth="1.5"/>
-        </svg>
+        </svg
       </div>
       <div className="pointer-events-none absolute right-0 bottom-16 z-10 w-28 opacity-25 scale-x-[-1]">
         <svg viewBox="0 0 110 180" fill="none" xmlns="http://www.w3.org/2000/svg">

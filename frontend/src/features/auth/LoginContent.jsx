@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Leaf, LoaderCircle, ShieldCheck } from "lucide-react";
 
-const API_URL = process.env.NEXT_PUBLIC_APP_API_URL || "http://localhost:5000/api";
+const API_URL = process.env.NEXT_PUBLIC_APP_API_URL || "https://agrisence-backend.onrender.com/api";
 
 const initialForm = {
   mode: "login",

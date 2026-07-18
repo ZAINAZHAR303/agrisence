@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Leaf, LoaderCircle, ShieldCheck, X } from "lucide-react";
 
-const API_URL = process.env.NEXT_PUBLIC_APP_API_URL || "http://localhost:5000/api";
+const API_URL = process.env.NEXT_PUBLIC_APP_API_URL || "https://agrisence-backend.onrender.com/api";
 
 const initialForm = {
   name: "",

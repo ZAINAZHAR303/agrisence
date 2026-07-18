@@ -130,29 +130,29 @@ export default function DiseaseDetectionContent() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950/60" />
         </div>
 
-        <div className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-10 py-16 md:py-20">
+        <div className="relative z-10 w-full px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-32 py-16 md:py-20">
           <div className="inline-flex items-center gap-2 rounded-full border border-green-400/30 bg-green-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-green-400 mb-6">
             <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
             AI Disease Detection
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white leading-tight max-w-2xl">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight max-w-3xl">
             Scan Your Leaf,<br />
             <span className="text-green-400">Get Instant Results</span>
           </h1>
-          <p className="mt-4 text-slate-300 text-base leading-8 max-w-xl">
+          <p className="mt-4 text-slate-300 text-sm sm:text-base leading-7 sm:leading-8 max-w-xl">
             Upload a clear photo of your cotton leaf and our AI will identify the disease, severity, and recommend the right treatment — in seconds.
           </p>
 
           {/* quick stats */}
-          <div className="mt-8 flex flex-wrap gap-6">
+          <div className="mt-10 flex flex-wrap gap-8 sm:gap-12">
             {[
               { label: "Detection Accuracy", value: "94.2%" },
               { label: "Diseases Detected",  value: "7 Types" },
               { label: "Scan Time",          value: "< 3 sec" },
             ].map((s) => (
               <div key={s.label} className="text-center">
-                <div className="text-2xl font-extrabold text-green-400">{s.value}</div>
-                <div className="text-xs text-slate-400 mt-0.5">{s.label}</div>
+                <div className="text-3xl sm:text-4xl font-extrabold text-green-400">{s.value}</div>
+                <div className="text-sm text-slate-400 mt-1">{s.label}</div>
               </div>
             ))}
           </div>
@@ -160,20 +160,20 @@ export default function DiseaseDetectionContent() {
       </section>
 
       {/* ══ MAIN CONTENT ══════════════════════════════════════ */}
-      <div className="bg-slate-50 min-h-screen">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-10 py-12">
+      <div className="bg-slate-50 min-h-screen w-full">
+        <div className="w-full px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-32 py-12">
 
           {/* ── UPLOAD SECTION ── */}
-          <div className="grid lg:grid-cols-[1fr_340px] gap-6 items-start">
+          <div className="grid lg:grid-cols-[1fr_340px] gap-6 items-start w-full">
 
             {/* upload card */}
-            <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
-              <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="h-8 w-8 rounded-xl bg-green-50 flex items-center justify-center">
-                    <ScanLine className="h-4 w-4 text-green-600" />
+            <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden w-full">
+              <div className="px-6 py-6 border-b border-slate-100 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-green-50 flex items-center justify-center">
+                    <ScanLine className="h-5 w-5 text-green-600" />
                   </div>
-                  <span className="font-bold text-slate-900">Scan Deck</span>
+                  <span className="font-bold text-lg text-slate-900">Scan Deck</span>
                 </div>
                 {uploadedFile && (
                   <button onClick={reset} className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-700 transition-colors">
@@ -236,29 +236,29 @@ export default function DiseaseDetectionContent() {
                           <Upload className="h-4 w-4 text-white" />
                         </div>
                       </div>
-                      <div className="text-lg font-bold text-slate-700 mt-2">Drop your leaf photo here</div>
-                      <div className="text-sm text-slate-400 mt-1">or click below to choose a file</div>
-                      <div className="mt-2 text-xs text-slate-300">JPG, PNG, WEBP supported</div>
+                      <div className="text-xl font-bold text-slate-700 mt-3">Drop your leaf photo here</div>
+                      <div className="text-base text-slate-400 mt-1.5">or click below to choose a file</div>
+                      <div className="mt-2 text-sm text-slate-300">JPG, PNG, WEBP supported</div>
                     </div>
                   )}
                 </div>
 
                 {/* action buttons */}
-                <div className="mt-4 flex gap-3">
-                  <label className="flex-1 flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 cursor-pointer transition-all">
-                    <Upload className="h-4 w-4 text-green-600" />
+                <div className="mt-5 flex gap-3">
+                  <label className="flex-1 flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 px-5 py-4 text-base font-semibold text-slate-700 cursor-pointer transition-all">
+                    <Upload className="h-5 w-5 text-green-600" />
                     Choose Image
                     <input type="file" accept="image/*" className="hidden" onChange={(e) => handleFile(e.target.files?.[0])} />
                   </label>
                   <button
                     onClick={handleAnalyze}
                     disabled={analyzing || !uploadedFile}
-                    className="flex-1 flex items-center justify-center gap-2 rounded-2xl bg-green-500 hover:bg-green-400 disabled:opacity-50 disabled:cursor-not-allowed px-4 py-3 text-sm font-bold text-white transition-all shadow-md shadow-green-500/20"
+                    className="flex-1 flex items-center justify-center gap-2 rounded-2xl bg-green-500 hover:bg-green-400 disabled:opacity-50 disabled:cursor-not-allowed px-5 py-4 text-base font-bold text-white transition-all shadow-md shadow-green-500/20"
                   >
                     {analyzing ? (
-                      <><LoaderCircle className="h-4 w-4 animate-spin" /> Scanning...</>
+                      <><LoaderCircle className="h-5 w-5 animate-spin" /> Scanning...</>
                     ) : (
-                      <><ScanLine className="h-4 w-4" /> Scan Now</>
+                      <><ScanLine className="h-5 w-5" /> Scan Now</>
                     )}
                   </button>
                 </div>
@@ -275,16 +275,16 @@ export default function DiseaseDetectionContent() {
             {/* tips sidebar */}
             <div className="space-y-4">
               {/* how to take photo */}
-              <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-5">
-                <div className="flex items-center gap-2 mb-4">
-                  <Info className="h-4 w-4 text-green-600" />
-                  <span className="text-sm font-bold text-slate-900">Photo Tips</span>
+              <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6">
+                <div className="flex items-center gap-3 mb-5">
+                  <Info className="h-5 w-5 text-green-600" />
+                  <span className="text-base font-bold text-slate-900">Photo Tips</span>
                 </div>
                 <div className="space-y-3">
                   {uploadTips.map(({ icon: Icon, text }) => (
-                    <div key={text} className="flex items-center gap-3 rounded-xl bg-slate-50 px-4 py-3">
-                      <div className="h-8 w-8 rounded-lg bg-green-50 flex items-center justify-center shrink-0">
-                        <Icon className="h-4 w-4 text-green-600" />
+                    <div key={text} className="flex items-center gap-3 rounded-xl bg-slate-50 px-4 py-3.5">
+                      <div className="h-9 w-9 rounded-lg bg-green-50 flex items-center justify-center shrink-0">
+                        <Icon className="h-5 w-5 text-green-600" />
                       </div>
                       <span className="text-sm text-slate-600 leading-6">{text}</span>
                     </div>
@@ -293,15 +293,15 @@ export default function DiseaseDetectionContent() {
               </div>
 
               {/* detectable diseases */}
-              <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-5">
-                <div className="flex items-center gap-2 mb-4">
-                  <Microscope className="h-4 w-4 text-green-600" />
-                  <span className="text-sm font-bold text-slate-900">Can Detect</span>
+              <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6">
+                <div className="flex items-center gap-3 mb-5">
+                  <Microscope className="h-5 w-5 text-green-600" />
+                  <span className="text-base font-bold text-slate-900">Can Detect</span>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   {["Bacterial Blight", "Curl Virus", "Herbicide Damage", "Leaf Hopper", "Leaf Redding", "Leaf Variegation", "Healthy Leaf"].map((d) => (
-                    <div key={d} className="flex items-center gap-2 text-sm text-slate-600">
-                      <ChevronRight className="h-3.5 w-3.5 text-green-500 shrink-0" />
+                    <div key={d} className="flex items-center gap-2.5 text-sm text-slate-600">
+                      <ChevronRight className="h-4 w-4 text-green-500 shrink-0" />
                       {d}
                     </div>
                   ))}

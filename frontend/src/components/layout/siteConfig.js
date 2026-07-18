@@ -1,4 +1,4 @@
-import { Bot, Camera, House, MessagesSquare } from "lucide-react";
+import { Bot, FlaskConical, House, Users } from "lucide-react";
 
 export const navigationLinks = [
   {
@@ -11,7 +11,7 @@ export const navigationLinks = [
     href: "/disease-detection",
     label: "Disease Lab",
     description: "Leaf scan and diagnosis",
-    icon: Camera,
+    icon: FlaskConical,
   },
   {
     href: "/assistant",
@@ -23,6 +23,6 @@ export const navigationLinks = [
     href: "/social",
     label: "Community",
     description: "Field notes from other growers",
-    icon: MessagesSquare,
+    icon: Users,
   },
 ];
